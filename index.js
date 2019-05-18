@@ -1,32 +1,31 @@
 
 
 
-/*const express = require('express')
+const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
-    res.send('Hello World')
-});
-
-app.listen(4000); */
-
-const fs = require('fs');
-
-const fileName = "target.txt";
-
-const data = fs.readFileSync(fileName);
-console.log(data.toString());
+// getting request from route
+const { getPost } = require("./routes/postroute");
 
 
-//fs.watch(fileName, () => console.log("file changed!"));
-/*fs.readFile(fileName, (err, data) => {
+// appling morgan middleware
 
-    if (err) {
-        console.log(err);
-    }
-    else {
-        console.log(data.toString());
-    }
-});*/
+const morgan = require('morgan');
 
-console.log("data is running Asyn !!");
+const mymiddleware = (req, res, next) => {
+
+    console.log("Middleware applied");
+    next();
+}
+
+// middleware
+
+app.use(morgan("dev"));
+app.use(mymiddleware);
+
+app.use('/', getPost);
+
+const port = 8080;
+
+app.listen(port, () => console.log(`we are listening port ${port}`));
+
