@@ -1,5 +1,5 @@
 
-
+const Post = require('../model/post');
 exports.getPosts = (req, res) => {
 
     res.json({
@@ -16,5 +16,9 @@ exports.getPosts = (req, res) => {
     })
 }
 
+exports.createPost = (req, res) => {
 
+    const post = new Post(req.body);
+    console.log(`creating Post :`, post);
+}
 

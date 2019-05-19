@@ -8,5 +8,6 @@ const router = express.Router();
 
 
 router.get('/', postcontroller.getPosts);
+router.get('/user', postcontroller.createPost);
 
 module.exports = router;
