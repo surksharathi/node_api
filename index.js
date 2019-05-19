@@ -5,25 +5,19 @@ const express = require('express')
 const app = express()
 
 // getting request from route
-const { getPost } = require("./routes/postroute");
+const { router } = require("./routes/post");
 
 
 // appling morgan middleware
 
 const morgan = require('morgan');
 
-const mymiddleware = (req, res, next) => {
-
-    console.log("Middleware applied");
-    next();
-}
-
 // middleware
 
 app.use(morgan("dev"));
-app.use(mymiddleware);
+//app.use(mymiddleware);
 
-app.use('/', getPost);
+app.use("/", router);
 
 const port = 8080;
 
